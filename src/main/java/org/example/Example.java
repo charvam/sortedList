@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Iterator;
+
 public class Example {
 
     public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class Example {
         integerExample();
     }
 
-    private static void integerExample() {
+    private static void stringExample() {
         SortedLinkedList<String> linkedListString = new SortedLinkedList<>();
         linkedListString.add("Adela");
         linkedListString.add("Adam");
@@ -21,14 +23,13 @@ public class Example {
             System.out.println(next);
         }
 
-        System.out.println("Adam contains " + linkedListString.contains("Adam") + " times.");
-        System.out.println("Pavel contains " + linkedListString.contains("Pavel") + " times.");
+        System.out.println("Is word 'Adam' in list:" + linkedListString.contains("Adam"));
+        System.out.println("Is word 'Pavel' in list:" + linkedListString.contains("Pavel"));
     }
 
-    private static void stringExample() {
+    private static void integerExample() {
         SortedLinkedList<Integer> linkedListInteger = new SortedLinkedList<>();
-        final int value1 = 1;
-        linkedListInteger.add(value1);
+        linkedListInteger.add(1);
         linkedListInteger.add(1000);
         linkedListInteger.add(0);
         linkedListInteger.add(25);
@@ -40,8 +41,9 @@ public class Example {
             System.out.println(next);
         }
 
-        System.out.println("1000 contains " + linkedListInteger.contains(1000) + " times.");
-        System.out.println("2 contains " + linkedListInteger.contains(2) + " times.");
+        System.out.println("Is number '1' in list:" + linkedListInteger.contains(1));
+        System.out.println("Is number '2' in list:" + linkedListInteger.contains(2));
+
     }
 
 }

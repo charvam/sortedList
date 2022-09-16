@@ -2,7 +2,11 @@ package org.example;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,11 +39,8 @@ class SortedLinkedListTest {
     void contains() {
         SortedLinkedList<Integer> sortedLinkedList = new SortedLinkedList<>();
         sortedLinkedList.add(10);
-        sortedLinkedList.add(1);
-        sortedLinkedList.add(1);
 
-        assertEquals(1, sortedLinkedList.contains(10));
-        assertEquals(2, sortedLinkedList.contains(1));
-        assertEquals(0, sortedLinkedList.contains(2));
+        assertTrue(sortedLinkedList.contains(10));
+        assertFalse(sortedLinkedList.contains(1));
     }
 }

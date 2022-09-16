@@ -1,10 +1,12 @@
 package org.example;
 
 
-public class SortedLinkedList<T extends Comparable<T>> implements LinkedList<T> {
+import java.util.Iterator;
+
+public class SortedLinkedList<T extends Comparable<T>> implements Iterable<T> {
+    private int size;
     private Element<T> first;
 
-    @Override
     public void add(T value) {
         if (value == null) {
             throw new IllegalArgumentException("Input value can not be null");
@@ -23,28 +25,25 @@ public class SortedLinkedList<T extends Comparable<T>> implements LinkedList<T> 
 
             addNewElement(value, current, previous);
         }
+        size++;
     }
 
-    @Override
-    public int contains(T value) {
-        int count = 0;
-        final Iterator<T> iterator = iterator();
-        while (iterator.hasNext()) {
-            final T next = iterator.next();
-            if (next.compareTo(value) == 0)  {
-                count++;
+    public boolean contains(T value) {
+
+        for (T next : this) {
+            if (next.compareTo(value) == 0) {
+                return true;
             }
         }
-        return count;
+        return false;
     }
 
-    @Override
     public void remove(T value) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    public Iterator<T> iterator() {
-        return new Iterator<>(first);
+    public int size() {
+        return size;
     }
 
     private void addNewElement(T value, Element<T> current, Element<T> previous) {
@@ -87,5 +86,54 @@ public class SortedLinkedList<T extends Comparable<T>> implements LinkedList<T> 
     
     private boolean isLast(Element<T> element) {
         return element.getNext() == null;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+
+        return new Iterator<T>() {
+            Element<T> current = first;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                if (current == null) {
+                    return null;
+                } else {
+                    T value = current.getValue();
+                    current = current.getNext();
+                    return value;
+                }
+            }
+        };
+    }
+
+    private static class Element<T> {
+        private Element<T> next;
+        private T value;
+
+        public Element(T value) {
+            this.value = value;
+        }
+
+        public Element<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Element<T> next) {
+            this.next = next;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
     }
 }
